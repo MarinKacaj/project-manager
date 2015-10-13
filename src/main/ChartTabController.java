@@ -5,8 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.chart.AreaChart;
-import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseButton;
@@ -47,13 +45,13 @@ public class ChartTabController {
 		final StableTicksAxis xAxis2 = new StableTicksAxis();
 		final StableTicksAxis yAxis2 = new StableTicksAxis();
 
-		final CurvedFittedAreaChart areaChart1 = new CurvedFittedAreaChart(xAxis1, yAxis1);
-		areaChart1.setTitle("Grafik");
+        final main.CurvedFittedAreaChart areaChart1 = new main.CurvedFittedAreaChart(xAxis1, yAxis1);
+        areaChart1.setTitle("Grafik");
 		xAxis1.setLabel("Koha");
 		yAxis1.setLabel("Kosto");
 
-		final CurvedFittedAreaChart areaChart2 = new CurvedFittedAreaChart(xAxis2, yAxis2);
-		areaChart2.setTitle("Temperature Monitoring (in Degrees F)");
+        final main.CurvedFittedAreaChart areaChart2 = new main.CurvedFittedAreaChart(xAxis2, yAxis2);
+        areaChart2.setTitle("Temperature Monitoring (in Degrees F)");
 		xAxis2.setLabel("X");
 		yAxis2.setLabel("Y");
 
@@ -169,13 +167,13 @@ public class ChartTabController {
 		tabPane.getTabs().get(0).setContent(gridPane);
 	}
 
+    public TabPane getTabPane() {
+        return tabPane;
+    }
+        
 	public void setTabPane(TabPane tabPane) {
 		this.tabPane = tabPane;
 	}
-        
-        public TabPane getTabPane(){
-            return tabPane;
-        }
 
 	public void setMainApp(Content mainApp) {
 		this.mainApp = mainApp;
@@ -185,8 +183,8 @@ public class ChartTabController {
 		this.sum = sum;
 	}
 
-	public void autoZoom(CurvedFittedAreaChart chart) {
-		chart.getXAxis().setAutoRanging(true);
+    public void autoZoom(main.CurvedFittedAreaChart chart) {
+        chart.getXAxis().setAutoRanging(true);
 		chart.getYAxis().setAutoRanging(true);
 		ObservableList<XYChart.Series<Number, Number>> data = chart.getData();
 		chart.setData(FXCollections.<XYChart.Series<Number, Number>> emptyObservableList());
