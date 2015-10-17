@@ -1,4 +1,4 @@
-package main;
+package main.model;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Point2D;
@@ -102,8 +102,8 @@ public class CurvedFittedAreaChart extends AreaChart<Number, Number> {
 			// 3P1 = 2P0 + P3
 			firstControlPoints[0] = new Point2D((2 * dataPoints[0].getX() + dataPoints[1].getX()) / 3,
 					(2 * dataPoints[0].getY() + dataPoints[1].getY()) / 3);
-
 			secondControlPoints = new Point2D[1];
+                        
 			// P2 = 2P1 – P0
 			secondControlPoints[0] = new Point2D(2 * firstControlPoints[0].getX() - dataPoints[0].getX(),
 					2 * firstControlPoints[0].getY() - dataPoints[0].getY());
@@ -156,7 +156,7 @@ public class CurvedFittedAreaChart extends AreaChart<Number, Number> {
 	 *            Right hand side vector.
 	 * @return Solution vector.
 	 */
-	private static double[] GetFirstControlPoints(double[] rhs) {
+	public static double[] GetFirstControlPoints(double[] rhs) {
 		int n = rhs.length;
 		double[] x = new double[n]; // Solution vector.
 		double[] tmp = new double[n]; // Temp workspace.
@@ -169,7 +169,8 @@ public class CurvedFittedAreaChart extends AreaChart<Number, Number> {
 		}
 		for (int i = 1; i < n; i++)
 			x[n - i - 1] -= tmp[n - i] * x[n - i]; // Backsubstitution.
-
+                
+                
 		return x;
 	}
 }

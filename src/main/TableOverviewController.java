@@ -78,6 +78,8 @@ public class TableOverviewController {
     private Content mainApp;
 
     private ObservableList<Activity> activityData = FXCollections.observableArrayList();
+    
+    public static int tableIndex=0;
 
     @FXML
     public void initialize() {
@@ -116,9 +118,13 @@ public class TableOverviewController {
             @Override
             public void handle(CellEditEvent<Activity, String> t) {
                 int index = activityData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()));
+                if(activityData.get(index).getParentValue() ==0){
+                    showAlert();
+                }
+                else{
                 activityData.get(index).setDurationString(t.getNewValue());
                 ((Activity) t.getTableView().getItems().get(t.getTablePosition().getRow()))
-                        .setDurationString(t.getNewValue());
+                        .setDurationString(t.getNewValue());}
             }
         });
         
@@ -129,11 +135,18 @@ public class TableOverviewController {
             @Override
             public void handle(CellEditEvent<Activity, String> t) {
                 int index = activityData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                activityData.get(index).setBudgetString(t.getNewValue());
+                if(activityData.get(index).getParentValue() ==0){
+                    showAlert();
+                }
+                else{
+                    activityData.get(index).setBudgetString(t.getNewValue());
                 ((Activity) t.getTableView().getItems().get(t.getTablePosition().getRow()))
                         .setBudgetString(t.getNewValue());
-                activityData.get(index).setBudget(Double.parseDouble(t.getNewValue()));
+                activityData.get(index).setBudget(Double.parseDouble(unformatString(t.getNewValue())));
+                activityData.get(index).Calculate();
                 activityData.get(index).ConvertToStringProperty();
+                mainApp.Refresh();
+                System.out.println(unformatString(t.getNewValue()));}
             }
         });
 
@@ -157,12 +170,17 @@ public class TableOverviewController {
             @Override
             public void handle(CellEditEvent<Activity, String> t) {
                 int index = activityData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                activityData.get(index).setPriceString(t.getNewValue());
+                if(activityData.get(index).getParentValue() ==0){
+                    showAlert();
+                }
+                else{
+                    activityData.get(index).setPriceString(t.getNewValue());
                 ((Activity) t.getTableView().getItems().get(t.getTablePosition().getRow()))
                         .setPriceString(t.getNewValue());
-                activityData.get(index).setPriceValue(Double.parseDouble(t.getNewValue()));
+                activityData.get(index).setPriceValue(Double.parseDouble(unformatString(t.getNewValue())));
                 activityData.get(index).Calculate();
                 activityData.get(index).ConvertToStringProperty();
+                mainApp.Refresh();}
             }
         });
         
@@ -173,12 +191,17 @@ public class TableOverviewController {
             @Override
             public void handle(CellEditEvent<Activity, String> t) {
                 int index = activityData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                activityData.get(index).setPlannedAmountString(t.getNewValue());
+                if(activityData.get(index).getParentValue() ==0){
+                    showAlert();
+                }
+                else{
+                    activityData.get(index).setPlannedAmountString(t.getNewValue());
                 ((Activity) t.getTableView().getItems().get(t.getTablePosition().getRow()))
                         .setPlannedAmountString(t.getNewValue());
-                activityData.get(index).setPlannedAmount(Double.parseDouble(t.getNewValue()));
+                activityData.get(index).setPlannedAmount(Double.parseDouble(unformatString(t.getNewValue())));
                 activityData.get(index).Calculate();
                 activityData.get(index).ConvertToStringProperty();
+                mainApp.Refresh();}
             }
         });
         
@@ -189,12 +212,17 @@ public class TableOverviewController {
             @Override
             public void handle(CellEditEvent<Activity, String> t) {
                 int index = activityData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                activityData.get(index).setCurrentAmountString(t.getNewValue());
+                if(activityData.get(index).getParentValue() ==0){
+                    showAlert();
+                }
+                else{
+                    activityData.get(index).setCurrentAmountString(t.getNewValue());
                 ((Activity) t.getTableView().getItems().get(t.getTablePosition().getRow()))
                         .setCurrentAmountString(t.getNewValue());
-                activityData.get(index).setCurrentAmount(Double.parseDouble(t.getNewValue()));
+                activityData.get(index).setCurrentAmount(Double.parseDouble(unformatString(t.getNewValue())));
                 activityData.get(index).Calculate();
                 activityData.get(index).ConvertToStringProperty();
+                mainApp.Refresh();}
             }
         });
         
@@ -205,12 +233,17 @@ public class TableOverviewController {
             @Override
             public void handle(CellEditEvent<Activity, String> t) {
                 int index = activityData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                activityData.get(index).setActualAmountString(t.getNewValue());
+                if(activityData.get(index).getParentValue() ==0){
+                    showAlert();
+                }
+                else{
+                    activityData.get(index).setActualAmountString(t.getNewValue());
                 ((Activity) t.getTableView().getItems().get(t.getTablePosition().getRow()))
                         .setActualAmountString(t.getNewValue());
-                activityData.get(index).setActualAmount(Double.parseDouble(t.getNewValue()));
+                activityData.get(index).setActualAmount(Double.parseDouble(unformatString(t.getNewValue())));
                 activityData.get(index).Calculate();
                 activityData.get(index).ConvertToStringProperty();
+                mainApp.Refresh();}
             }
         });
 
@@ -221,13 +254,17 @@ public class TableOverviewController {
             @Override
             public void handle(CellEditEvent<Activity, String> t) {
                 int index = activityData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                activityData.get(index).setPlannedProgressString(t.getNewValue());
+                if(activityData.get(index).getParentValue() ==0){
+                    showAlert();
+                }
+                else{
+                    activityData.get(index).setPlannedProgressString(t.getNewValue());
                 ((Activity) t.getTableView().getItems().get(t.getTablePosition().getRow()))
                         .setPlannedProgressString(t.getNewValue());
                 activityData.get(index).setPlannedProgressFromPercentage(t.getNewValue());
-                System.out.println("PP :"+activityData.get(index).getPlannedProgress());
                 activityData.get(index).Calculate();
                 activityData.get(index).ConvertToStringProperty();
+                mainApp.Refresh();}
             }
         });
 
@@ -238,13 +275,17 @@ public class TableOverviewController {
             @Override
             public void handle(CellEditEvent<Activity, String> t) {
                 int index = activityData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                activityData.get(index).setCurrentProgressString(t.getNewValue());
+                if(activityData.get(index).getParentValue() ==0){
+                    showAlert();
+                }
+                else{
+                    activityData.get(index).setCurrentProgressString(t.getNewValue());
                 ((Activity) t.getTableView().getItems().get(t.getTablePosition().getRow()))
                         .setCurrentProgressString(t.getNewValue());
                 activityData.get(index).setCurrentProgressFromPercentage(t.getNewValue());
-                System.out.println("CP :"+activityData.get(index).getCurrentProgress());
                 activityData.get(index).Calculate();
                 activityData.get(index).ConvertToStringProperty();
+                mainApp.Refresh();}
             }
         });
 
@@ -255,12 +296,17 @@ public class TableOverviewController {
             @Override
             public void handle(CellEditEvent<Activity, String> t) {
                 int index = activityData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                activityData.get(index).setPvString(t.getNewValue());
+                if(activityData.get(index).getParentValue() ==0){
+                    showAlert();
+                }
+                else{
+                    activityData.get(index).setPvString(t.getNewValue());
                 ((Activity) t.getTableView().getItems().get(t.getTablePosition().getRow()))
                         .setPvString(t.getNewValue());
-                activityData.get(index).setPV(Double.parseDouble(t.getNewValue()));
+                activityData.get(index).setPV(Double.parseDouble(unformatString(t.getNewValue())));
                 activityData.get(index).Calculate();
                 activityData.get(index).ConvertToStringProperty();
+                mainApp.Refresh();}
             }
         });
 
@@ -271,17 +317,22 @@ public class TableOverviewController {
             @Override
             public void handle(CellEditEvent<Activity, String> t) {
                 int index = activityData.indexOf(t.getTableView().getItems().get(t.getTablePosition().getRow()));
-                activityData.get(index).setAcString(t.getNewValue());
+                if(activityData.get(index).getParentValue() ==0){
+                    showAlert();
+                }
+                else{
+                    activityData.get(index).setAcString(t.getNewValue());
                 ((Activity) t.getTableView().getItems().get(t.getTablePosition().getRow()))
                         .setAcString(t.getNewValue());
-                activityData.get(index).setAC(Double.parseDouble(t.getNewValue()));
+                activityData.get(index).setAC(Double.parseDouble(unformatString(t.getNewValue())));
                 activityData.get(index).Calculate();
                 activityData.get(index).ConvertToStringProperty();
+                mainApp.Refresh();}
             }
         });
 
         evColumn.setCellValueFactory(cellData -> cellData.getValue().evProperty());
-        evColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //evColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         evColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Activity, String>>() {
 
             @Override
@@ -294,7 +345,7 @@ public class TableOverviewController {
         });
 
         cvColumn.setCellValueFactory(cellData -> cellData.getValue().cvProperty());
-        cvColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //cvColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         cvColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Activity, String>>() {
 
             @Override
@@ -307,7 +358,7 @@ public class TableOverviewController {
         });
 
         svColumn.setCellValueFactory(cellData -> cellData.getValue().svProperty());
-        svColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //svColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         svColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Activity, String>>() {
 
             @Override
@@ -320,7 +371,7 @@ public class TableOverviewController {
         });
 
         cpiColumn.setCellValueFactory(cellData -> cellData.getValue().cpiProperty());
-        cpiColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //cpiColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         cpiColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Activity, String>>() {
 
             @Override
@@ -333,7 +384,7 @@ public class TableOverviewController {
         });
 
         spiColumn.setCellValueFactory(cellData -> cellData.getValue().spiProperty());
-        spiColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        //spiColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         spiColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<Activity, String>>() {
 
             @Override
@@ -368,9 +419,9 @@ public class TableOverviewController {
             // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Activity Selected");
-            alert.setContentText("Please select an activity from the table.");
+            alert.setTitle("Nuk ka selektim");
+            alert.setHeaderText("Asnje aktivitet nuk është selektuar");
+            alert.setContentText("Ju lutemi, zgjidhni një aktivitet nga tabela.");
 
             alert.showAndWait();
         }
@@ -379,13 +430,37 @@ public class TableOverviewController {
     public void setMainApp(Content mainApp) {
         this.mainApp = mainApp;
         activityTable.setItems(mainApp.getTableData());
+        System.out.println("TableOverview Method: MainApp ("+mainApp.getIndex()+") set!!");
+        System.out.println("Table Index: "+tableIndex);
     }
 
     public void setTableData(ObservableList<Activity> activityData) {
         this.activityData = activityData;
+        System.out.println("Table Data set!");
     }
 
     public TableView<Activity> getTable() {
         return activityTable;
     }
+    
+    public void showAlert(){
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.initOwner(mainApp.getPrimaryStage());
+        alert.setTitle("Error");
+        alert.setHeaderText("Aktiviteti i zgjedhur eshte Prind");
+        alert.setContentText("Fushat e aktivitetit prind nuk mund te modifikohen");
+
+        alert.showAndWait();
+    }
+    
+     public static String unformatString(String str) {
+        String tmp = new String();
+        tmp = str;
+
+        for (int i = 0; i < tmp.length(); i++) {
+            if (tmp.contains(","))
+                tmp = tmp.replace(",", "");
+        }  
+        return tmp;
+ }
 }

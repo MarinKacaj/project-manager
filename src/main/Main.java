@@ -36,8 +36,6 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.GridPane;
 import javax.swing.JPanel;
 
-
-
 /**
  * @author krisli
  */
@@ -54,6 +52,7 @@ public class Main extends Application {
     public int MAX_TABS = 15;
     public Content[] content = new Content[MAX_TABS];
     public SingleSelectionModel<Tab> sm;
+    public TableOverviewController controller[] = new TableOverviewController[MAX_TABS];
 
     /**
      * @param args the command line arguments
@@ -144,6 +143,7 @@ public class Main extends Application {
             //Lexon XML-n nga skedari dhe ben unmarshall
             ActivityListWrapper wrapper = (ActivityListWrapper) um.unmarshal(file);
 
+            ObservableList<Activity> tableData = FXCollections.observableArrayList();
             tableData.clear();
             tableData.addAll(wrapper.getActivities());
             content[tabIndex] = new Content();
