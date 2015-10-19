@@ -6,12 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.chart.AreaChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.shape.ClosePath;
-import javafx.scene.shape.CubicCurveTo;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.PathElement;
+import javafx.scene.shape.*;
 import javafx.util.Pair;
 import jfxutils.chart.StableTicksAxis;
 
@@ -23,25 +18,6 @@ public class CurvedFittedAreaChart extends AreaChart<Number, Number> {
 
 	public CurvedFittedAreaChart(StableTicksAxis xAxis, StableTicksAxis yAxis) {
 		super(xAxis, yAxis);
-	}
-
-	/**
-	 * @inheritDoc
-	 */
-	@Override
-	protected void layoutPlotChildren() {
-		super.layoutPlotChildren();
-		for (int seriesIndex = 0; seriesIndex < getDataSize(); seriesIndex++) {
-			final XYChart.Series<Number, Number> series = getData().get(seriesIndex);
-			final Path seriesLine = (Path) ((Group) series.getNode()).getChildren().get(1);
-			final Path fillPath = (Path) ((Group) series.getNode()).getChildren().get(0);
-			smooth(seriesLine.getElements(), fillPath.getElements());
-		}
-	}
-
-	private int getDataSize() {
-		final ObservableList<XYChart.Series<Number, Number>> data = getData();
-		return (data != null) ? data.size() : 0;
 	}
 
 	private static void smooth(ObservableList<PathElement> strokeElements, ObservableList<PathElement> fillElements) {
@@ -89,10 +65,10 @@ public class CurvedFittedAreaChart extends AreaChart<Number, Number> {
 
 	/**
 	 * Calculate open-ended Bezier Spline Control Points.
-	 * 
-	 * @param dataPoints
-	 *            Input data Bezier spline points.
-	 */
+     *
+     * @param dataPoints
+     *            Input data Bezier spline points.
+     */
 	public static Pair<Point2D[], Point2D[]> calcCurveControlPoints(Point2D[] dataPoints) {
 		Point2D[] firstControlPoints;
 		Point2D[] secondControlPoints;
@@ -103,7 +79,7 @@ public class CurvedFittedAreaChart extends AreaChart<Number, Number> {
 			firstControlPoints[0] = new Point2D((2 * dataPoints[0].getX() + dataPoints[1].getX()) / 3,
 					(2 * dataPoints[0].getY() + dataPoints[1].getY()) / 3);
 			secondControlPoints = new Point2D[1];
-                        
+
 			// P2 = 2P1 – P0
 			secondControlPoints[0] = new Point2D(2 * firstControlPoints[0].getX() - dataPoints[0].getX(),
 					2 * firstControlPoints[0].getY() - dataPoints[0].getY());
@@ -151,15 +127,15 @@ public class CurvedFittedAreaChart extends AreaChart<Number, Number> {
 	/**
 	 * Solves a tridiagonal system for one of coordinates (x or y) of first
 	 * Bezier control points.
-	 * 
-	 * @param rhs
-	 *            Right hand side vector.
-	 * @return Solution vector.
+     *
+     * @param rhs
+     *            Right hand side vector.
+     * @return Solution vector.
 	 */
-	public static double[] GetFirstControlPoints(double[] rhs) {
-		int n = rhs.length;
-		double[] x = new double[n]; // Solution vector.
-		double[] tmp = new double[n]; // Temp workspace.
+    public static double[] GetFirstControlPoints(double[] rhs) {
+        int n = rhs.length;
+        double[] x = new double[n]; // Solution vector.
+        double[] tmp = new double[n]; // Temp workspace.
 		double b = 2.0;
 		x[0] = rhs[0] / b;
 		for (int i = 1; i < n; i++) {// Decomposition and forward substitution.
@@ -169,8 +145,27 @@ public class CurvedFittedAreaChart extends AreaChart<Number, Number> {
 		}
 		for (int i = 1; i < n; i++)
 			x[n - i - 1] -= tmp[n - i] * x[n - i]; // Backsubstitution.
-                
-                
-		return x;
-	}
+
+
+        return x;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @Override
+    protected void layoutPlotChildren() {
+        super.layoutPlotChildren();
+        for (int seriesIndex = 0; seriesIndex < getDataSize(); seriesIndex++) {
+            final XYChart.Series<Number, Number> series = getData().get(seriesIndex);
+            final Path seriesLine = (Path) ((Group) series.getNode()).getChildren().get(1);
+            final Path fillPath = (Path) ((Group) series.getNode()).getChildren().get(0);
+            smooth(seriesLine.getElements(), fillPath.getElements());
+        }
+    }
+
+    private int getDataSize() {
+        final ObservableList<XYChart.Series<Number, Number>> data = getData();
+        return (data != null) ? data.size() : 0;
+    }
 }

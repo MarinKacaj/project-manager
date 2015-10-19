@@ -141,8 +141,7 @@ public class InputDialogController {
                 alert.setContentText(errorMessage);
 
                 alert.showAndWait();
-            }
-            else if(startTimeTF.isDisabled()){
+            } else if (startTimeTF.isDisabled()) {
                 activity.ConvertToStringProperty();
                 saveClicked = true;
                 dialogStage.close();
