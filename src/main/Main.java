@@ -12,9 +12,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import main.model.Activity;
 import main.model.ActivityListWrapper;
@@ -24,23 +25,18 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.prefs.Preferences;
-import javafx.scene.control.Button;
-import javafx.scene.control.SingleSelectionModel;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.GridPane;
-import javax.swing.JPanel;
 
 /**
  * @author krisli
  */
 public class Main extends Application {
 
+    public int tabIndex = 0;
+    public int MAX_TABS = 15;
+    public Content[] content = new Content[MAX_TABS];
+    public SingleSelectionModel<Tab> sm;
+    public TableOverviewController controller[] = new TableOverviewController[MAX_TABS];
     private Stage primaryStage;
     private BorderPane root;
     private BorderPane[] ContentRootLayout = new BorderPane[100];
@@ -48,11 +44,6 @@ public class Main extends Application {
     private ObservableList<Activity> tableData = FXCollections.observableArrayList();
     private Activity sum = new Activity();
     private ChartTabController chartTabController = new ChartTabController();
-    public int tabIndex = 0;
-    public int MAX_TABS = 15;
-    public Content[] content = new Content[MAX_TABS];
-    public SingleSelectionModel<Tab> sm;
-    public TableOverviewController controller[] = new TableOverviewController[MAX_TABS];
 
     /**
      * @param args the command line arguments

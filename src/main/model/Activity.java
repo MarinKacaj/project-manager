@@ -1,12 +1,13 @@
 package main.model;
 
-import java.text.SimpleDateFormat;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import main.util.CalendarUtil;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import main.util.CalendarUtil;
 
 /**
  * @author krisli
@@ -55,11 +56,11 @@ public class Activity {
     public double valETC;
     public double valBAC;
     public double valEAC;
-    
+
     public double CPIone;
     public double CPItwo;
     public double CPIthree;
-    
+
     public double SPIone;
     public double SPItwo;
     public double SPIthree;
@@ -419,19 +420,19 @@ public class Activity {
     public String getCurrentProgressPercentage() {
         return "" + valCP * 100 + "%";
     }
-    
-        
+
+
     public Calendar getCurrentProgressValue() {
-  double temp = getCurrentProgress();
-  long time = (long) ((getEndTimeValue().getTimeInMillis() - getStartTimeValue().getTimeInMillis()) * temp
-    + getStartTimeValue().getTimeInMillis());
+        double temp = getCurrentProgress();
+        long time = (long) ((getEndTimeValue().getTimeInMillis() - getStartTimeValue().getTimeInMillis()) * temp
+                + getStartTimeValue().getTimeInMillis());
 
-  Date itemDate = new Date(time);
+        Date itemDate = new Date(time);
 
-  String itemDateStr = new SimpleDateFormat("dd-MM-yyyy").format(itemDate);
+        String itemDateStr = new SimpleDateFormat("dd-MM-yyyy").format(itemDate);
 
-  return CalendarUtil.parse(itemDateStr);
- }
+        return CalendarUtil.parse(itemDateStr);
+    }
     
     
     public void setCurrentProgressFromPercentage(String CPP){
@@ -499,28 +500,28 @@ public class Activity {
     public void setSPI(double SPI) {
         this.valSPI = SPI;
     }
-    
-    public double getBAC(){
+
+    public double getBAC() {
         return valBAC;
     }
-    
-    public void setBAC(double bac){
+
+    public void setBAC(double bac) {
         this.valBAC = bac;
     }
-    
-    public double getETC(){
+
+    public double getETC() {
         return valETC;
     }
-    
-    public void setETC(double etc){
+
+    public void setETC(double etc) {
         this.valETC = etc;
     }
-    
-    public double getEAC(){
+
+    public double getEAC() {
         return valEAC;
     }
-    
-    public void setEAC(double eac){
+
+    public void setEAC(double eac) {
         this.valEAC = eac;
     }
 
@@ -545,52 +546,52 @@ public class Activity {
     public void setEndTimeValue(Calendar eT){
         this.endTime = eT;
     }
-    
-    public double getFirstCPI(){
+
+    public double getFirstCPI() {
         return CPIone;
     }
-    
-    public void setFirstCPI(double fCPI){
+
+    public void setFirstCPI(double fCPI) {
         this.CPIone = fCPI;
     }
-    
-    public double getSecondCPI(){
+
+    public double getSecondCPI() {
         return CPItwo;
     }
-    
-    public void setSecondCPI(double sCPI){
+
+    public void setSecondCPI(double sCPI) {
         this.CPItwo = sCPI;
     }
-    
-    public double getThirdCPI(){
+
+    public double getThirdCPI() {
         return CPIthree;
     }
-       
-    public void setThirdCPI(double tCPI){
+
+    public void setThirdCPI(double tCPI) {
         this.CPIthree = tCPI;
     }
-    
-    public double getFirstSPI(){
+
+    public double getFirstSPI() {
         return SPIone;
     }
-    
-    public void setFirstSPI(double fSPI){
+
+    public void setFirstSPI(double fSPI) {
         this.SPIone = fSPI;
     }
-    
-    public double getSecondSPI(){
+
+    public double getSecondSPI() {
         return SPItwo;
     }
-    
-    public void setSecondSPI(double sSPI){
+
+    public void setSecondSPI(double sSPI) {
         this.SPItwo = sSPI;
     }
-    
-    public double getThirdSPI(){
+
+    public double getThirdSPI() {
         return SPIthree;
     }
-    
-    public void setThirdSPI(double tSPI){
+
+    public void setThirdSPI(double tSPI) {
         this.SPIthree = tSPI;
     }
     
