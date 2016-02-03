@@ -5,11 +5,6 @@
  */
 package main;
 
-import javafx.fxml.FXML;
-import javafx.stage.FileChooser;
-
-import java.io.File;
-
 /**
  * @author krisli
  */

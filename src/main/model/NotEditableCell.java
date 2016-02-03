@@ -7,7 +7,6 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import main.model.Activity;
 
 public class NotEditableCell extends TableCell<Activity, String> {
 	private TextField textField;

@@ -16,13 +16,13 @@
 
 package jfxutils;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
 import javafx.scene.Node;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * EventHandlerManager manages a set of event handler registrations on a target, for which all of

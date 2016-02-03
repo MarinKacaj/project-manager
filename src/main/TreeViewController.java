@@ -5,10 +5,6 @@
  */
 package main;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -19,16 +15,28 @@ import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import main.model.Activity;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
 public class TreeViewController implements Initializable {
 
+	public static int treeIndex = 0;
 	public TreeItem<String> dummyRoot = new TreeItem<String>("Aktivitete");
+	ObservableList<String> tempData = FXCollections.observableArrayList();
 	private Content mainApp;
 	private ObservableList<Activity> data;
 	private Node rootNode;
-	public static int treeIndex = 0;
-
-	ObservableList<String> tempData = FXCollections.observableArrayList();
 	private TreeView<String> treeView;
+
+	public static int checkVal(String str) {
+		String tmpStr = "";
+		if (str.contains(".")) {
+			String temp[] = str.split("\\.");
+			tmpStr = temp[0];
+		}
+		return Integer.parseInt(String.valueOf(tmpStr));
+	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -108,15 +116,6 @@ public class TreeViewController implements Initializable {
 		});
 		treeView.setShowRoot(true);
 
-	}
-
-	public static int checkVal(String str) {
-		String tmpStr = "";
-		if (str.contains(".")) {
-			String temp[] = str.split("\\.");
-			tmpStr = temp[0];
-		}
-		return Integer.parseInt(String.valueOf(tmpStr));
 	}
 
 	public void setMainApp(Content mainApp) {

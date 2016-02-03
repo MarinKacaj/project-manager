@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="360.0" style="-fx-background-color: rgba(93,93,93,1.0);" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.InputDialogController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="AnchorPane" prefHeight="500.0" prefWidth="360.0"
+            style="-fx-background-color: rgba(93,93,93,1.0);" stylesheets="@DarkTheme.css"
+            xmlns="http://javafx.com/javafx/8" fx:controller="main.InputDialogController">
    <children>
       <SplitPane dividerPositions="0.29518072289156627" focusTraversable="true" orientation="VERTICAL" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: rgba(93,93,93,1.0);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>

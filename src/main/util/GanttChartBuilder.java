@@ -1,11 +1,5 @@
  package main.util;
 
- import java.awt.BasicStroke;
- import java.awt.Color;
- import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Paint;
-
  import org.jfree.chart.ChartFactory;
  import org.jfree.chart.ChartPanel;
  import org.jfree.chart.JFreeChart;
@@ -19,6 +13,8 @@ import java.awt.Paint;
  import org.jfree.data.category.IntervalCategoryDataset;
  import org.jfree.ui.RectangleEdge;
  import org.jfree.ui.RectangleInsets;
+
+ import java.awt.*;
 
  /**
   * Created by Marin KaÃ§aj on 10/6/2015. Builds a Gantt chart.

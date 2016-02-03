@@ -5,15 +5,11 @@
  */
 package main;
 
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
@@ -138,12 +134,12 @@ public class SettingsController {
         return saveClicked;
     }
     
-    public void setSettings(int[] Settings){
-        this.Settings = Settings;
-    }
-    
     public int[] getSettings(){
         return Settings;
+    }
+
+    public void setSettings(int[] Settings) {
+        this.Settings = Settings;
     }
     
     private boolean convert(int val){

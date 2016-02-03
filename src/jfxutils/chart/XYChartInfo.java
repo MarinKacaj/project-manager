@@ -23,7 +23,8 @@ import javafx.scene.chart.Axis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Region;
 
-import static jfxutils.JFXUtil.*;
+import static jfxutils.JFXUtil.getXShift;
+import static jfxutils.JFXUtil.getYShift;
 
 /**
  * XYChartInfo provides information about areas in an {@link XYChart}. Most of the methods deal with

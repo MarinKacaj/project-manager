@@ -1,12 +1,13 @@
 package main.model;
 
-import java.text.SimpleDateFormat;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import main.util.CalendarUtil;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import main.util.CalendarUtil;
 
 /**
  * @author krisli

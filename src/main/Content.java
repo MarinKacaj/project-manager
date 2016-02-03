@@ -5,16 +5,6 @@
  */
 package main;
 
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.jfree.chart.ChartPanel;
-import org.jfree.data.category.IntervalCategoryDataset;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingNode;
@@ -31,12 +21,22 @@ import javafx.stage.Stage;
 import main.model.Activity;
 import main.util.GanttChartBuilder;
 import main.util.IntervalBuilder;
+import org.jfree.chart.ChartPanel;
+import org.jfree.data.category.IntervalCategoryDataset;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author krisli
  */
 public class Content {
+	public boolean empty = false;
+	public int Settings[] = new int[10];
 	private Stage primaryStage;
 	private ObservableList<Activity> data = FXCollections.observableArrayList();
 	private BorderPane rootLayout;
@@ -44,10 +44,8 @@ public class Content {
 	private ChartTabController chartTabController = new ChartTabController();
 	private Main mainApp;
 	private TabPane tabRootLayout;
-	public boolean empty = false;
 	private int index;
 	private ObservableList<Activity> temp = FXCollections.observableArrayList();
-        public int Settings[] = new int[10];
 
 	public void initRootLayout() {
 		try {
@@ -456,12 +454,12 @@ public class Content {
 		this.empty = val;
 	}
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
 	public int getIndex() {
 		return index;
+	}
+
+	public void setIndex(int index) {
+		this.index = index;
 	}
         
         public int[] getSettings(){

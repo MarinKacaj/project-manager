@@ -1,10 +1,5 @@
 package main;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,27 +9,11 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.LineChart;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.chart.*;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -45,16 +24,20 @@ import main.model.Activity;
 import main.model.CurvedFittedAreaChart;
 import main.util.CalendarUtil;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class ChartTabController {
 
 	TabPane tabPane;
+	int counter = 0;
 	private Activity sum;
 	private Content mainApp;
 	private Activity temp;
 	private ObservableList<Activity> data = FXCollections.observableArrayList();
         private boolean showEac = true;
-
-	int counter = 0;
 
 	public ChartTabController() {
 	}
@@ -424,12 +407,12 @@ public class ChartTabController {
 		this.data = activityData;
 	}
 
-	public void setTabPane(TabPane tabPane) {
-		this.tabPane = tabPane;
-	}
-
 	public TabPane getTabPane() {
 		return tabPane;
+	}
+
+	public void setTabPane(TabPane tabPane) {
+		this.tabPane = tabPane;
 	}
 
 	public void setMainApp(Content mainApp) {
@@ -439,14 +422,14 @@ public class ChartTabController {
 	public void setActivitySum(Activity sum) {
 		this.sum = sum;
 	}
-        
-        public void setShowEac(boolean showEac){
-            this.showEac = showEac;
-        }
-        
-        public boolean getShowEac(){
-            return this.showEac; 
-       }
+
+	public boolean getShowEac() {
+		return this.showEac;
+	}
+
+	public void setShowEac(boolean showEac) {
+		this.showEac = showEac;
+	}
 
 	public void autoZoom(CurvedFittedAreaChart chart) {
 		chart.getXAxis().setAutoRanging(true);

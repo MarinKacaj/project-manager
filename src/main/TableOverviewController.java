@@ -1,107 +1,83 @@
 package main;
 
-import main.model.EditingCell;
-import main.model.NotEditableCell;
-import java.util.ArrayList;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Orientation;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.control.TableRow;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.ScrollEvent;
 import javafx.util.Callback;
 import main.model.Activity;
+import main.model.EditingCell;
+import main.model.NotEditableCell;
 import main.model.SelectableRow;
+
+import java.util.ArrayList;
 
 public class TableOverviewController {
 
+	public static int tableIndex = 0;
+	ArrayList<Integer> check = new ArrayList<>();
 	@FXML
 	private Button add;
-
 	@FXML
 	private Button delete;
-
 	@FXML
 	private TableView<Activity> activityTable;
-
 	@FXML
 	private TableColumn<Activity, String> nameColumn;
-
 	@FXML
 	private TableColumn<Activity, String> idColumn;
-
 	@FXML
 	private TableColumn<Activity, String> durationColumn;
-
 	@FXML
 	private TableColumn<Activity, String> budgetColumn;
-
 	@FXML
 	private TableColumn<Activity, String> unitColumn;
-
 	@FXML
 	private TableColumn<Activity, String> priceColumn;
-        
         @FXML
 	private TableColumn<Activity, String> staticAmountColumn;
-        
 	@FXML
 	private TableColumn<Activity, String> plannedAmountColumn;
-
 	@FXML
 	private TableColumn<Activity, String> currentAmountColumn;
-
 	@FXML
 	private TableColumn<Activity, String> actualAmountColumn;
-
 	@FXML
 	private TableColumn<Activity, String> currentProgressColumn;
-
 	@FXML
 	private TableColumn<Activity, String> pvColumn;
-
 	@FXML
 	private TableColumn<Activity, String> acColumn;
-
 	@FXML
 	private TableColumn<Activity, String> evColumn;
-
 	@FXML
 	private TableColumn<Activity, String> cvColumn;
-
 	@FXML
 	private TableColumn<Activity, String> svColumn;
-
 	@FXML
 	private TableColumn<Activity, String> cpiColumn;
-
 	@FXML
 	private TableColumn<Activity, String> spiColumn;
-
 	private Content mainApp;
-
 	private ObservableList<Activity> activityData = FXCollections.observableArrayList();
 
-	public static int tableIndex = 0;
+	public static String unformatStringNumber(String str) {
+		String tmp = new String();
+		tmp = str;
 
-	ArrayList<Integer> check = new ArrayList<>();
+		for (int i = 0; i < tmp.length(); i++) {
+			if (tmp.contains(","))
+				tmp = tmp.replace(",", "");
+		}
+		return tmp;
+	}
 
 	@FXML
 	public void initialize() {
-                
+
 		Callback<TableColumn<Activity, String>, TableCell<Activity, String>> cellFactory = new Callback<TableColumn<Activity, String>, TableCell<Activity, String>>() {
 
 			@Override
@@ -117,8 +93,8 @@ public class TableOverviewController {
 				return new NotEditableCell();
 			}
 		};
-                
-                Callback<TableColumn<Activity, String>, TableCell<Activity, String>> cellFactorySelectableRow = new Callback<TableColumn<Activity, String>, TableCell<Activity, String>>() {
+
+		Callback<TableColumn<Activity, String>, TableCell<Activity, String>> cellFactorySelectableRow = new Callback<TableColumn<Activity, String>, TableCell<Activity, String>>() {
 
 			@Override
 			public TableCell call(TableColumn p) {
@@ -454,16 +430,5 @@ public class TableOverviewController {
 		alert.setContentText("Fushat e aktivitetit prind nuk mund te modifikohen");
 
 		alert.showAndWait();
-	}
-
-	public static String unformatStringNumber(String str) {
-		String tmp = new String();
-		tmp = str;
-
-		for (int i = 0; i < tmp.length(); i++) {
-			if (tmp.contains(","))
-				tmp = tmp.replace(",", "");
-		}
-		return tmp;
 	}
 }

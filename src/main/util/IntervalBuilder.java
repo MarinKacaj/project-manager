@@ -1,12 +1,11 @@
 package main.util;
 
+import javafx.collections.ObservableList;
+import main.model.Activity;
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
 import org.jfree.data.gantt.TaskSeriesCollection;
-
-import javafx.collections.ObservableList;
-import main.model.Activity;
 
 /**
  * Created by Marin KaÃ§aj on 10/6/2015. Converts activities into the expected

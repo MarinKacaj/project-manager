@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-
-<TabPane id="TabPane" stylesheets="@DarkTheme.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ChartTabController">
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<TabPane xmlns:fx="http://javafx.com/fxml/1" id="TabPane" stylesheets="@DarkTheme.css" tabClosingPolicy="UNAVAILABLE"
+         xmlns="http://javafx.com/javafx/8" fx:controller="main.ChartTabController">
     <tabs>
         <Tab id="Tab" text="Grafiku i Projektit" />
         <Tab id="Tab" text="Grafiku Gantt" />
