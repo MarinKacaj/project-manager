@@ -6,19 +6,21 @@
 package main;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 /**
  * @author krisli
@@ -26,10 +28,10 @@ import java.util.logging.Logger;
 public class RootController {
 
     private Main mainApp;
-
+  
     @FXML
     private TabPane ProjectTab;
-
+    
     public void setMainApp(main.Main mainApp) {
         this.mainApp = mainApp;
     }
@@ -45,24 +47,24 @@ public class RootController {
         mainApp.incrementTabIndex();
     }
 
-    @FXML
-    private void handleOpen() {
-        FileChooser fileChooser = new FileChooser();
+        @FXML
+        private void handleOpen() {
+            FileChooser fileChooser = new FileChooser();
 
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                    "XML files (*.xml)", "*.xml");
+            fileChooser.getExtensionFilters().add(extFilter);
 
-        // Show save File Dialog
-        File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
+            // Show save File Dialog
+            File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
 
-        if (file != null) {
-            ProjectTab.getTabs().add(new Tab(file.getName()));
-            mainApp.setProjectTab(ProjectTab);
-            mainApp.loadActivityDataFromFile(file);
+            if (file != null) {
+                ProjectTab.getTabs().add(new Tab(file.getName()));
+                mainApp.setProjectTab(ProjectTab);
+                mainApp.loadActivityDataFromFile(file);
+            }
         }
-    }
 
     @FXML
     private void handleSave() {
@@ -94,30 +96,35 @@ public class RootController {
             mainApp.saveActivityDataToFile(file);
         }
     }
-
+    
     @FXML
-    private void handleSettings() {
-        try {
+    private boolean handleSettings(){
+        try{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(Main.class.getResource("view/Settings.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
-
+            
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Cilesimet");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(mainApp.getPrimaryStage());
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
-
+            
             SettingsController controller = new SettingsController();
             controller.setSettings(mainApp.getSettings());
             //controller.initData();
             controller.setDialogStage(dialogStage);
-
+            
+            
             dialogStage.showAndWait();
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            
+            return controller.isSaveClicked();           
         }
+        catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+	}
     }
 
     @FXML
