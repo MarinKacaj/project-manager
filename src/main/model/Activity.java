@@ -1,12 +1,13 @@
 package main.model;
 
-import java.text.SimpleDateFormat;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import main.util.CalendarUtil;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import main.util.CalendarUtil;
 
 /**
  * @author krisli
@@ -20,7 +21,6 @@ public class Activity {
     private final StringProperty budget;
     private final StringProperty unit;
     private final StringProperty price;
-    private final StringProperty staticAmount;
     private final StringProperty plannedAmount;
     private final StringProperty currentAmount;
     private final StringProperty actualAmount;
@@ -39,7 +39,6 @@ public class Activity {
     public long valDUR;
     public double valBUDG;
     public double valPRICE;
-    public double valSA; // Static Amount (SA) -- sasia statike e planifikuar
     public double valPA; // Planned Amount(PA)
     public double valCA; // Current Amount(CA)
     public double valAA; // Actual Amount(AA)
@@ -57,31 +56,22 @@ public class Activity {
     public double valETC;
     public double valBAC;
     public double valEAC;
-    
+
     public double CPIone;
     public double CPItwo;
     public double CPIthree;
-    
+
     public double SPIone;
     public double SPItwo;
     public double SPIthree;
-    
-    public Calendar date1;
-    public Calendar date2;
-    public Calendar date3;
-    
-    public double TCPI;
-    public double TSPI;
-    
-    public double AP; //Afati deri ne Perfundim
 
     public int parent = 0;
 
     public Activity() {
-        this("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+        this("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
     }
 
-    public Activity(String name, String id, String duration, String budget, String unit, String price, String staticAmount, String plannedAmount, String currentAmount, String actualAmount, String plannedProgress, String current_progress,
+    public Activity(String name, String id, String duration, String budget, String unit, String price, String plannedAmount, String currentAmount, String actualAmount, String plannedProgress, String current_progress,
                     String pv, String ac, String ev, String cv, String sv, String cpi, String spi) {
         this.name = new SimpleStringProperty(name);
         this.id = new SimpleStringProperty(id);
@@ -89,7 +79,6 @@ public class Activity {
         this.budget = new SimpleStringProperty(budget);
         this.unit = new SimpleStringProperty(unit);
         this.price = new SimpleStringProperty(price);
-        this.staticAmount = new SimpleStringProperty(staticAmount);
         this.plannedAmount = new SimpleStringProperty(plannedAmount);
         this.currentAmount = new SimpleStringProperty(currentAmount);
         this.actualAmount = new SimpleStringProperty(actualAmount);
@@ -182,19 +171,6 @@ public class Activity {
 
     public StringProperty priceProperty() {
         return price;
-    }
-    
-    //STATIC AMOUNT
-    public String getStaticAmountString(){
-        return staticAmount.get();
-    }
-    
-    public void setStaticAmountString(String data){
-        staticAmount.set(data);
-    }
-    
-    public StringProperty staticAmountProperty(){
-        return staticAmount;
     }
     
     // PLANNED AMOUNT
@@ -387,14 +363,6 @@ public class Activity {
         this.valPRICE = PRC;
     }
     
-    public double getStaticAmount(){
-        return valSA;
-    }
-    
-    public void setStaticAmount(double SA){
-        this.valSA = SA;
-    }
-    
     public double getPlannedAmount(){
         return valPA;
     }
@@ -428,18 +396,13 @@ public class Activity {
     }
 
     public String getPlannedProgressPercentage() {
-        String temp;
-        temp = String.format("%1$.2f", valPP*100);
-        temp+="%";
-        return temp;
+        return "" + valPP * 100 + "%";
     }
     
     public void setPlannedProgressFromPercentage(String PPP){
         String temp;
         Double val;
         int percentageIndex = PPP.indexOf("%");
-        if(percentageIndex == -1)
-            percentageIndex = PPP.length();
         temp = PPP.substring(0, percentageIndex);
         val = Double.parseDouble(temp);
         val = val/100;
@@ -455,17 +418,14 @@ public class Activity {
     }
 
     public String getCurrentProgressPercentage() {
-        String temp;
-        temp = String.format("%1$,.2f", valCP*100);
-        temp+="%";
-        return temp;
+        return "" + valCP * 100 + "%";
     }
-    
-        
+
+
     public Calendar getCurrentProgressValue() {
         double temp = getCurrentProgress();
         long time = (long) ((getEndTimeValue().getTimeInMillis() - getStartTimeValue().getTimeInMillis()) * temp
-                            + getStartTimeValue().getTimeInMillis());
+                + getStartTimeValue().getTimeInMillis());
 
         Date itemDate = new Date(time);
 
@@ -479,8 +439,6 @@ public class Activity {
         String temp;
         Double val;
         int percentageIndex = CPP.indexOf("%");
-        if(percentageIndex == -1)
-            percentageIndex = CPP.length();
         temp = CPP.substring(0, percentageIndex);
         val = Double.parseDouble(temp);
         val = val/100;
@@ -542,28 +500,28 @@ public class Activity {
     public void setSPI(double SPI) {
         this.valSPI = SPI;
     }
-    
-    public double getBAC(){
+
+    public double getBAC() {
         return valBAC;
     }
-    
-    public void setBAC(double bac){
+
+    public void setBAC(double bac) {
         this.valBAC = bac;
     }
-    
-    public double getETC(){
+
+    public double getETC() {
         return valETC;
     }
-    
-    public void setETC(double etc){
+
+    public void setETC(double etc) {
         this.valETC = etc;
     }
-    
-    public double getEAC(){
+
+    public double getEAC() {
         return valEAC;
     }
-    
-    public void setEAC(double eac){
+
+    public void setEAC(double eac) {
         this.valEAC = eac;
     }
 
@@ -588,129 +546,68 @@ public class Activity {
     public void setEndTimeValue(Calendar eT){
         this.endTime = eT;
     }
-    
-    public double getFirstCPI(){
+
+    public double getFirstCPI() {
         return CPIone;
     }
-    
-    public void setFirstCPI(double fCPI){
+
+    public void setFirstCPI(double fCPI) {
         this.CPIone = fCPI;
     }
-    
-    public double getSecondCPI(){
+
+    public double getSecondCPI() {
         return CPItwo;
     }
-    
-    public void setSecondCPI(double sCPI){
+
+    public void setSecondCPI(double sCPI) {
         this.CPItwo = sCPI;
     }
-    
-    public double getThirdCPI(){
+
+    public double getThirdCPI() {
         return CPIthree;
     }
-       
-    public void setThirdCPI(double tCPI){
+
+    public void setThirdCPI(double tCPI) {
         this.CPIthree = tCPI;
     }
-    
-    public double getFirstSPI(){
+
+    public double getFirstSPI() {
         return SPIone;
     }
-    
-    public void setFirstSPI(double fSPI){
+
+    public void setFirstSPI(double fSPI) {
         this.SPIone = fSPI;
     }
-    
-    public double getSecondSPI(){
+
+    public double getSecondSPI() {
         return SPItwo;
     }
-    
-    public void setSecondSPI(double sSPI){
+
+    public void setSecondSPI(double sSPI) {
         this.SPItwo = sSPI;
     }
-    
-    public double getThirdSPI(){
+
+    public double getThirdSPI() {
         return SPIthree;
     }
-    
-    public void setThirdSPI(double tSPI){
+
+    public void setThirdSPI(double tSPI) {
         this.SPIthree = tSPI;
-    }
-    
-    public Calendar getFirstDate(){
-        return date1;
-    }
-    
-    public void setFirstDate(Calendar d1){
-        this.date1 = d1;
-    }
-    
-    public Calendar getSecondDate(){
-        return date2;
-    }
-    
-    public void setSecondDate(Calendar d2){
-        this.date2 = d2;
-    }
-    
-    public Calendar getThirdDate(){
-        return date3;
-    }
-    
-    public void setThirdDate(Calendar d3){
-        this.date3 = d3;
-    }
-    
-    public double getTcpiValue(){
-        return TCPI;
-    }
-    
-    public void setTcpiValue(double tcpi){
-        this.TCPI = tcpi;
-    }
-    
-    public double getTspiValue(){
-        return TSPI;
-    }
-    
-    public void setTspiValue(double tspi){
-        this.TSPI = tspi;
-    }
-    
-    public double getApValue(){
-        return AP;
-    }
-    
-    public void setApValue(double ap){
-        this.AP = ap;
     }
     
     public void Calculate() {
         getDateDiff(endTime, startTime, TimeUnit.DAYS);
-            
-        if(valSA == 0){
-            if(valAA == 0)
-                valCP = 0;
-            else
-                valCP = 1;
-        }
-        else{
-            valCP = valAA / valSA;
-            
-        }
-            valPV = valPA * valPRICE;
-            valAC = valAA * valPRICE;
-            valEV = valPRICE * valCA;
+        if (valAC == 0 || valPV == 0) {
+            valCPI = 0;
+            valSPI = 0;
+        } else {
+            valEV = valPRICE * valAA;
             valCV = valEV - valAC;
             valSV = valEV - valPV;
-            if (valAC == 0 || valPV == 0) {
-                valCPI = 0;
-                valSPI = 0;
-            }
-            else{
             valCPI = valEV / valAC;
             valSPI = valEV / valPV;
-            }
+        }
+
     }
     
     public void getDateDiff(Calendar date1, Calendar date2, TimeUnit timeUnit) {
@@ -733,7 +630,6 @@ public class Activity {
         setDurationString("" + valDUR);
         setBudgetString(toString(valBUDG));
         setPriceString(toString(valPRICE));
-        setStaticAmountString(toString(valSA));
         setPlannedAmountString(toString(valPA));
         setCurrentAmountString(toString(valCA));
         setActualAmountString(toString(valAA));
@@ -756,7 +652,3 @@ public class Activity {
         this.parent = p;
     }
 }
-
-//PV = SASIE PLANIFIKUAR * CMIMI
-//AC = SASI FAKTIKE (CURRENT) * CMIMI
-//Fut sassine e preventivit statik
